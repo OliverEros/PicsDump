@@ -1,5 +1,5 @@
 ### PicsDump
-<img src=https://imgur.com/wZBrupw align="center">
+<img src =https://i.imgur.com/wZBrupw.png align='center'>
 Automatizing unused image deletion for HTML emails/e-shots.
 
 ## Intro:
