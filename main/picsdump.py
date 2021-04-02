@@ -1,6 +1,7 @@
 from package.fileScraper import Filescraper
 from package.folderparser import folderScraper
 from package.banner import banner
+from configuration.configuration import Configuration
 from colorama import Fore, Style
 
 import subprocess
@@ -43,7 +44,10 @@ def start(error_message = None):
         to_delete = False
    
     # Declaring objects
-    foparser = folderScraper()
+    os_detector = Configuration()
+    os_detector.which_OS()
+
+    foparser = folderScraper(os_detector.slash)
     fiparser = Filescraper()
     # Prints banner
     print(Fore.BLUE + banner + Style.RESET_ALL)
@@ -65,7 +69,6 @@ def start(error_message = None):
 #        subprocess.run('clear') 
         start(e)
     else:
-        foparser.searchFolder(path)
         fiparser.parseText(path)
 
          # Check if images need to be deleted
