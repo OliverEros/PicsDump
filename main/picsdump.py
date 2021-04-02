@@ -1,12 +1,15 @@
 from package.fileScraper import Filescraper
 from package.folderparser import folderScraper
+from package.banner import banner
+from colorama import Fore, Style
 
+import subprocess
 import os
 import sys
 
 # Prompts user for folder path
 def get_path():
-   return input('Enter path: ')
+   return input('\n\nEnter path: ')
 
 # Checks if there is a need to delete images at all
 # by comparing the two sets of found image names
@@ -32,23 +35,35 @@ def delete_pictures(path, set1, set2, will_delete):
         [print(name + ' unused!') for name in set1]
 
 # Start of program
-def start():
+def start(error_message = None):
+    
+    #Safe mode. If 4 any reason images should not be deleted
     to_delete = True
-    # Instead of deleting images, only prints their name
     if '-s' in sys.argv:
         to_delete = False
-
+   
+    # Declaring objects
     foparser = folderScraper()
     fiparser = Filescraper()
+    # Prints banner
+    print(Fore.BLUE + banner + Style.RESET_ALL)
 
+    #Prints error message if there is any, else pass
+    if error_message == None:
+        pass
+    else:
+        print(Fore.RED + str(error_message) + Style.RESET_ALL)
+    
+    #Get path from user
     path = get_path()
     print('Path is set to: ' + path)
 
+    #Check for errors
     try:
          foparser.searchFolder(path)  
     except Exception as e:
-        print(e)
-        start()
+#        subprocess.run('clear') 
+        start(e)
     else:
         foparser.searchFolder(path)
         fiparser.parseText(path)
