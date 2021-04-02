@@ -8,11 +8,12 @@ class folderScraper:
         self.images = {}
 
     def searchFolder(self, path):
-        if not folderScraper.pathExists(path):
+        if not folderScraper.pathExists(path) or not folderScraper.pathExists(folderScraper.formatText(path)):
             raise Exception("Path " + path + " does not exist!")
-        else:  
+        else:
+            print('we got here, boys')
             self.path = folderScraper.formatText(path)
-            self.images = {f for f in os.listdir(self.path + '/images') if os.path.isfile(self.path + "/images/" + f) and self.getPicturesOnly(f) == True}
+            self.images = {f for f in os.listdir(self.path) if os.path.isfile(self.path + f) and self.getPicturesOnly(f) == True}
 
     def print_files(self):
        print(self.images)
@@ -36,7 +37,7 @@ class folderScraper:
     @staticmethod
     def formatText(path):
         if path[-1] != "/":
-            return path + "/"
+            return path + "/images/"
         else:
             return path
     
