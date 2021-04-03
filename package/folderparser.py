@@ -17,7 +17,7 @@ class folderScraper:
         else:
             self.path = format_path(path, self.slash,1)
             self.images = {f for f in os.listdir(self.path) if file_exists(self.path + f) and self.getPicturesOnly(f) == True}
-
+    
     def print_files(self):
        print(self.images)
 

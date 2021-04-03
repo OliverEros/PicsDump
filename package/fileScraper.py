@@ -12,7 +12,6 @@ class Filescraper:
 
     def parseText(self, path):
             file =format_path(path,self.slash,0)
-            print(file)
             if file_exists(file):
                 file = codecs.open(file, "r", "utf-8").read()
                 formated = re.sub('\s*', '',file, count=0)
