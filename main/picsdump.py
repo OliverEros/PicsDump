@@ -10,7 +10,7 @@ import sys
 
 # Prompts user for folder path
 def get_path():
-   return input('\n\nEnter path: ')
+  return input('\n\nEnter path: ')
 
 # Checks if there is a need to delete images at all
 # by comparing the two sets of found image names
@@ -51,7 +51,7 @@ def start(error_message = None):
     os_detector.which_OS()
 
     foparser = folderScraper(os_detector.slash)
-    fiparser = Filescraper()
+    fiparser = Filescraper(os_detector.slash)
     # Prints banner
     print(Fore.BLUE + banner + Style.RESET_ALL)
 
@@ -63,16 +63,16 @@ def start(error_message = None):
     
     #Get path from user
     path = get_path()
+        
 
     #Check for errors
     try:
-         foparser.searchFolder(path)  
+         foparser.searchFolder(path) 
+         fiparser.parseText(path)
     except Exception as e:
 #        subprocess.run('clear') 
         start(e)
     else:
-        fiparser.parseText(path)
-
          # Check if images need to be deleted
         if not should_delete(foparser.images, fiparser.foundImages):
             print('No unused image was found')

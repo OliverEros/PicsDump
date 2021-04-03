@@ -1,6 +1,7 @@
 import re
 import codecs
-from .folderparser import *
+
+from package.utils import format_path,file_exists
 
 class Filescraper:
     def __init__(self,OS, file = ""):
@@ -10,13 +11,19 @@ class Filescraper:
         self.slash = r"{}".format(OS)
 
     def parseText(self, path):
-        if(folderScraper.pathExists(path)):
-            file = codecs.open(folderScraper.formatText(path,OS)  + "index.html", "r", "utf-8").read()
-            formated = re.sub('\s*', '',file, count=0)
-            self.foundImages  = {i for i in re.findall(re.compile(self.regex),formated)}
+            file =format_path(path,self.slash,0)
+            print(file)
+            if file_exists(file):
+                file = codecs.open(file, "r", "utf-8").read()
+                formated = re.sub('\s*', '',file, count=0)
+                self.foundImages  = {i for i in re.findall(re.compile(self.regex),formated)}
+            else:
+                raise Exception("No html file was found")
+
 
     def print_images(self):
         print(self.foundImages)
+    
                     
             
 

@@ -1,20 +1,22 @@
 import os
-
+from package.utils import format_path,path_exists,file_exists
 
 class folderScraper:
-    def __init__(self, path=""):
+    def __init__(self,OS, path=""):
         self.extensions = ['.jpg', '.gif', '.GIF', '.txt', '.png']
         self.path = path
         self.images = {}
         #Use appropriate slash (/ or \) depending on OS
-        self.slash = '/'
+        self.slash = r"{}".format(OS)
 
     def searchFolder(self, path):
-        if not folderScraper.pathExists(path) or not folderScraper.pathExists(folderScraper.formatText(path,self.slash)):
+        if not path_exists(path):
             raise Exception("Path " + path + " does not exist!")
+        elif not path_exists(format_path(path,self.slash,1)):
+            raise Exception("Path " + path + " has no image folder!")
         else:
-            self.path = folderScraper.formatText(path, self.slash)
-            self.images = {f for f in os.listdir(self.path) if os.path.isfile(self.path + f) and self.getPicturesOnly(f) == True}
+            self.path = format_path(path, self.slash,1)
+            self.images = {f for f in os.listdir(self.path) if file_exists(self.path + f) and self.getPicturesOnly(f) == True}
 
     def print_files(self):
        print(self.images)
@@ -35,16 +37,5 @@ class folderScraper:
     def return_found(self):
         return self.images
 
-    @staticmethod
-    def formatText(path,slash):
-        if path[-1] != slash:
-            return path + slash + 'images' + slash
-        else:
-            return path
-    
-    @staticmethod
-    def pathExists(path):
-        if os.path.exists(path):
-            return True
-        else:
-            return False
+   
+
