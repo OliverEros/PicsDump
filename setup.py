@@ -9,6 +9,6 @@ setup(
         python_requires='>=3',
         install_requires = [
                             'colorama'
-                           ]
+                           ],
         entry_points = { 'console_scripts' : ['picsdump=main.picsdump:start']},
         )
