@@ -2,7 +2,7 @@ from package.fileScraper import Filescraper
 from package.folderparser import folderScraper
 from package.banner import banner
 from configuration.configuration import Configuration
-from colorama import Fore, Style
+from colorama import Fore, Style, init
 
 import subprocess
 import os
@@ -42,6 +42,9 @@ def start(error_message = None):
     to_delete = True
     if '-s' in sys.argv:
         to_delete = False
+
+    #Enable printing colored text for colorama on Windows
+    init()
    
     # Declaring objects
     os_detector = Configuration()
@@ -60,7 +63,6 @@ def start(error_message = None):
     
     #Get path from user
     path = get_path()
-    print('Path is set to: ' + path)
 
     #Check for errors
     try:
