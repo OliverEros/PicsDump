@@ -1,12 +1,12 @@
 ### PicsDump
 <img src =https://i.imgur.com/wZBrupw.png align='center'>
-Automatizing unused image deletion for HTML emails/e-shots.
+Automising unused image deletion for HTML emails/e-shots.
 
 ## Intro:
-At work, my main responsibily is to create HTML e-mails (also called e-shots) for different clients. To speed up the crocess, sometimes we use existing templates from the past that have the same layout but use images that are not needed anymore. The completed work then gets uploaded to a server, therefore it is important that we do not have reduntant data taking up space such as the previously mentioned images. Unfortunately, sometimes I forget to delete them...so why not use automation instead? 
+Used to delete images from the image folder based on whether the filename was mentioned in the HTML file. Created to speed up having to go through old pictures manually.
 
 ## How it works?
-The structure of HTML e-mails comprises of two things: the index.html file and the image folder. The script uses two parsers, one for the file and one for the folder. First, the file is essentially scraped and then using regex, anything ending with .gif or .jpg is saved into a set. Then the folder is scanned as well. At last, the two sets are compared and anything that is not both gets deleted. <b>As of 03/04/21 Windows is supported! </b>
+The structure of HTML e-mails comprises of two things: the index.html file and the image folder. The script uses two parsers, one for the file and one for the folder. Using regex, we find anything ending with .gif or .jpg. Then the folder is scanned as well. Mismatches are deleted. <b>As of 03/04/21 Windows is supported! </b>
 
 
 ## Installation
